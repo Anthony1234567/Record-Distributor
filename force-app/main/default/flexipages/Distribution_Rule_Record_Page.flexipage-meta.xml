@@ -32,37 +32,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>force:detailPanel</componentName>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-1f44c637-4dbf-4878-a808-f4f12338f5f5</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-1f44c637-4dbf-4878-a808-f4f12338f5f5</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Standard.Tab.detail</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-34b9a015-5511-4619-86d7-286f1bcf2a35</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>tabs</name>
-                    <value>Facet-34b9a015-5511-4619-86d7-286f1bcf2a35</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tabset</componentName>
+                <componentName>distributionSourceInfoCard</componentName>
             </componentInstance>
         </itemInstances>
         <name>sidebar</name>
