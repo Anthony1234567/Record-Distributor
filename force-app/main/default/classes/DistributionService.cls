@@ -6,7 +6,13 @@
 public class DistributionService {
     static final List<Distribution_Rule__c> activeDistributionRuleList = [
         SELECT Distribution_Source_Id__c,
-            Daily_Cap__c
+            Daily_Cap__c,
+            (
+                SELECT Assignee__c
+                FROM Distribution_Logs__r
+                ORDER BY CreatedDate DESC
+                LIMIT 1
+            )
         FROM Distribution_Rule__c
         WHERE Active__c = true
     ];
@@ -38,7 +44,6 @@ public class DistributionService {
 
             if (!queueIdToDistributableRecordIdSetMap.isEmpty()) {
                 Map<String, Integer> distributorAndAssigneeIdConpositionToAssignmentCountMap = new Map<String, Integer>();
-                Map<Id, DateTime> distributorIdToLastAssignedTimeStampMap = new Map<Id, DateTime>();
                 Map<Id, Id> distributorIdToLastAssigneeIdMap = new Map<Id, Id>();
                 Map<Id, SObject> recordUpdateMap = new Map<Id, SObject>();
                 List<Distribution_Log__c> distributionLogInsertList = new List<Distribution_Log__c>();
@@ -61,7 +66,6 @@ public class DistributionService {
     
                 for (AggregateResult distributionAggregateForToday : [
                     SELECT COUNT(Id) Distribution_Count,
-                        MAX(CreatedDate) Last_Assigned_Timestamp,
                         Distribution_Rule__c,
                         Assignee__c
                     FROM Distribution_Log__c
@@ -71,14 +75,7 @@ public class DistributionService {
                 ]) {
                     Id distributionRule = (Id) distributionAggregateForToday.get('Distribution_Rule__c');
                     Id assignee = (String) distributionAggregateForToday.get('Assignee__c');
-                    DateTime lastAssignedTimestamp = (DateTime) distributionAggregateForToday.get('Last_Assigned_Timestamp');
                     Integer distributionCount = (Integer) distributionAggregateForToday.get('Distribution_Count');
-    
-                    if (!distributorIdToLastAssignedTimeStampMap.containsKey(distributionRule) ||
-                        (distributorIdToLastAssignedTimeStampMap.containsKey(distributionRule) && distributorIdToLastAssignedTimeStampMap.get(distributionRule) < lastAssignedTimestamp)) {
-                        distributorIdToLastAssignedTimeStampMap.put(distributionRule, lastAssignedTimestamp);
-                        distributorIdToLastAssigneeIdMap.put(distributionRule, assignee);
-                    }
     
                     distributorAndAssigneeIdConpositionToAssignmentCountMap.put(distributionRule + '' + assignee, distributionCount);
                 }
@@ -90,18 +87,18 @@ public class DistributionService {
                     if (!queueMembershipIdList.isEmpty() && queueIdToDistributableRecordIdSetMap.containsKey(queueId)) {
                     	Set<Id> distributableRecordIdSet = queueIdToDistributableRecordIdSetMap.get(queueId);
                         Integer queueMembershipIdListIndex = 0;
-    
-                        if (distributorIdToLastAssigneeIdMap.containsKey(distributionRule.Id)) {
-                            Id lastAssigneeId = distributorIdToLastAssigneeIdMap.get(distributionRule.Id);
-    
+                        
+                        if (!distributionRule.Distribution_Logs__r.isEmpty()) {
+                            Id lastAssigneeId = distributionRule.Distribution_Logs__r.get(0).Assignee__c;
+
                             if (queueMembershipIdList.contains(lastAssigneeId)) {
                                 queueMembershipIdListIndex = queueMembershipIdList.indexOf(lastAssigneeId) + 1;
-    
+
                                 if (queueMembershipIdListIndex >= queueMembershipIdList.size()) {
                                     queueMembershipIdListIndex = 0;
                                 }
                             }
-                        }
+                        }   
     
                         for (Id distributableRecordId : distributableRecordIdSet) {
                             if (!recordUpdateMap.containsKey(distributableRecordId)) {
