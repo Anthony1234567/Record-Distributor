@@ -6,27 +6,31 @@
     </applicationVisibilities>
     <description>Grants access to the Record Distributor lightning application</description>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Distribution_Log__c.Assignee__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Distribution_Log__c.Distribution_Timestamp__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Distribution_Rule__c.Active__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Distribution_Rule__c.Daily_Cap__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Distribution_Rule__c.Daily_Cap__c</field>
+        <field>Lead.Last_Distributed_Timestamp__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Record Distributor Admin</label>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Distribution_Rule__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
     <tabSettings>
         <tab>Distribution_Log__c</tab>
         <visibility>Visible</visibility>
