@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>DistributionService</members>
+        <members>DistributionBatch</members>
+        <members>DistributionTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>Distribution_Rule__c</members>
+        <members>Distribution_Log__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>Record_Distributor</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Distribution_Rule__c-Distribution Rule Layout</members>
+        <members>Distribution_Log__c-Distribution Log Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Distribution_Rule_Record_Page</members>
+        <members>Record_Distributor_UtilityBar</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>Distribution_Rule__c</members>
+        <members>Distribution_Log__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Record_Distributor_Admin</members>
+        <name>PermissionSet</name>
+    </types>
+    <version>51.0</version>
+</Package>
