@@ -29,7 +29,7 @@ class DistributionTest {
         
         insert new Distribution_Rule__c(
         	Active__c = true,
-            Queue__c = testAssignee.GroupId,
+            Distribution_Source_Id__c = testAssignee.GroupId,
             Daily_Cap__c = 2
         );
         

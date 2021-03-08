@@ -30,7 +30,7 @@ public class DistributionBatch implements Schedulable, Database.Batchable<SObjec
             FROM Lead
             WHERE OwnerId IN :DistributionService.getDistributableRecordOwnerIdSet()
             ORDER BY OwnerId,
-            	Last_Distributed_Timestamp__c DESC
+            	Last_Distributed_Timestamp__c
         ]);
     }
     

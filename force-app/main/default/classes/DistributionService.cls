@@ -5,7 +5,7 @@
  */
 public class DistributionService {
     static final List<Distribution_Rule__c> activeDistributionRuleList = [
-        SELECT Queue__c,
+        SELECT Distribution_Source_Id__c,
             Daily_Cap__c
         FROM Distribution_Rule__c
         WHERE Active__c = true
@@ -19,7 +19,7 @@ public class DistributionService {
         Map<Id, Set<Id>> queueIdToMembershipIdSetMap = new Map<Id, Set<Id>>();
 
         for (Distribution_Rule__c distributionRule : activeDistributionRuleList) {
-            queueIdToMembershipIdSetMap.put(distributionRule.Queue__c, new Set<Id>());
+            queueIdToMembershipIdSetMap.put(distributionRule.Distribution_Source_Id__c, new Set<Id>());
         }
     
         if (!queueIdToMembershipIdSetMap.isEmpty()) {
@@ -84,15 +84,15 @@ public class DistributionService {
                 }
     
                 for (Distribution_Rule__c distributionRule : activeDistributionRuleList) {
-                    Id queueId = distributionRule.Queue__c;
+                    Id queueId = distributionRule.Distribution_Source_Id__c;
                     List<Id> queueMembershipIdList = new List<Id>(queueIdToMembershipIdSetMap.get(queueId));
     
                     if (!queueMembershipIdList.isEmpty() && queueIdToDistributableRecordIdSetMap.containsKey(queueId)) {
                     	Set<Id> distributableRecordIdSet = queueIdToDistributableRecordIdSetMap.get(queueId);
                         Integer queueMembershipIdListIndex = 0;
     
-                        if (distributorIdToLastAssigneeIdMap.containsKey(DistributionRule.Id)) {
-                            Id lastAssigneeId = distributorIdToLastAssigneeIdMap.get(DistributionRule.Id);
+                        if (distributorIdToLastAssigneeIdMap.containsKey(distributionRule.Id)) {
+                            Id lastAssigneeId = distributorIdToLastAssigneeIdMap.get(distributionRule.Id);
     
                             if (queueMembershipIdList.contains(lastAssigneeId)) {
                                 queueMembershipIdListIndex = queueMembershipIdList.indexOf(lastAssigneeId) + 1;
@@ -123,8 +123,8 @@ public class DistributionService {
                                     distributableRecord.put('OwnerId', assigneeId);
                                     distributableRecord.put('Last_Distributed_Timestamp__c', Datetime.now());
                                     recordUpdateMap.put(distributableRecordId, distributableRecord);
-                                    distributorAndAssigneeIdConpositionToAssignmentCountMap.put(distributionKey, distributionCount++);
-        
+                                    distributorAndAssigneeIdConpositionToAssignmentCountMap.put(distributionKey, ++distributionCount);
+
                                     if (queueMembershipIdListIndex < queueMembershipIdList.size() - 1) {
                                         queueMembershipIdListIndex++;
                                     } else {
@@ -155,7 +155,7 @@ public class DistributionService {
         Set<Id> distributableRecordOwnerIdSet = new Set<Id>();
 
         for (Distribution_Rule__c activeDistributionRule : activeDistributionRuleList) {
-            distributableRecordOwnerIdSet.add(activeDistributionRule.Queue__c);
+            distributableRecordOwnerIdSet.add(activeDistributionRule.Distribution_Source_Id__c);
         }
 
         return distributableRecordOwnerIdSet;
