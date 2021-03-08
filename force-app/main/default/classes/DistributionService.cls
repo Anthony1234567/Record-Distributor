@@ -73,11 +73,11 @@ public class DistributionService {
                     GROUP BY Distribution_Rule__c,
                         Assignee__c
                 ]) {
-                    Id distributionRule = (Id) distributionAggregateForToday.get('Distribution_Rule__c');
-                    Id assignee = (String) distributionAggregateForToday.get('Assignee__c');
+                    Id distributionRuleId = (Id) distributionAggregateForToday.get('Distribution_Rule__c');
+                    Id assigneeId = (Id) distributionAggregateForToday.get('Assignee__c');
                     Integer distributionCount = (Integer) distributionAggregateForToday.get('Distribution_Count');
     
-                    distributorAndAssigneeIdConpositionToAssignmentCountMap.put(distributionRule + '' + assignee, distributionCount);
+                    distributorAndAssigneeIdConpositionToAssignmentCountMap.put(distributionRuleId + '' + assigneeId, distributionCount);
                 }
     
                 for (Distribution_Rule__c distributionRule : activeDistributionRuleList) {
