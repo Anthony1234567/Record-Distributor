@@ -4,7 +4,7 @@
         <application>Record_Distributor</application>
         <visible>true</visible>
     </applicationVisibilities>
-    <description>Grants access to the Record Distributor lightning application</description>
+    <description>Grants access to the Record Distributor lightning application and edit access to config data</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Distribution_Rule__c.Active__c</field>
@@ -21,7 +21,7 @@
         <readable>false</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>Record Distributor Admin</label>
+    <label>Record Distributor - Admin</label>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>

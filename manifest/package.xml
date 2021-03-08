@@ -32,6 +32,7 @@
     </types>
     <types>
         <members>Record_Distributor_Admin</members>
+        <members>Record_Distributor_Reporting</members>
         <name>PermissionSet</name>
     </types>
     <version>51.0</version>
