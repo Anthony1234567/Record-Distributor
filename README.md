@@ -21,6 +21,14 @@ The following fields are not required but will help with configuring the batches
 * Daily Cap - How many records can each user get (Maximum number of records assigned to individuals per day)
 * Batch Job Frequency
 
+### Distribution Rule Information
+Shows
+* Distribution logs for records assigned to individuals
+* Distribution source information including source name, type, and owned record counts
+* Distribution list (in order)
+
+![image](https://user-images.githubusercontent.com/6342285/111581645-ddae2400-8776-11eb-9094-cf408abc0b8a.png)
+
 ### Controlling Access to the App
 Access to the application is controlled via the **Record Distributor - Admin** permission set. Users assigned this permission set will be able to use the app and interact with relevant distributor configuration data 
 
