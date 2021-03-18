@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
-    <masterLabel>Distribution Source Info Card</masterLabel>
-    <description>Displays information about the distribution source such as type, name, and amount of distributable records</description>
+    <apiVersion>51.0</apiVersion>
+    <isExposed>false</isExposed>
+
+    <masterLabel>Distribution List Card</masterLabel>
+    <description>Displays assignees in order and information about who is up next</description>
     <apiVersion>51.0</apiVersion>
     <isExposed>true</isExposed>
     <targets>

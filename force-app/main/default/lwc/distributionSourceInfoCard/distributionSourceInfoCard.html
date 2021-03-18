@@ -1,5 +1,19 @@
 <template>
-    <lightning-card 
-        title="Distribution Source Information">
+    <lightning-card title="Distribution Source Information">
+        <template if:true={distributionSourceInfo}>
+            <div class="slds-card__body slds-card__body_inner">
+                Distribution Source Name: {distributionSourceInfo.distributionSourceName}
+
+                <ul>
+                    <template 
+                        for:each={distributionSourceInfo.talliedRelatedSObjectTypeOwnedRecordCounts} 
+                        for:item="talliedRelatedSObjectTypeOwnedRecordCount">
+                        <li key={talliedRelatedSObjectTypeOwnedRecordCount.sObjectTypeName}>
+                            Distributable {talliedRelatedSObjectTypeOwnedRecordCount.sObjectTypeName} Count: {talliedRelatedSObjectTypeOwnedRecordCount.ownedRecordCount}
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </template>
     </lightning-card>
 </template>

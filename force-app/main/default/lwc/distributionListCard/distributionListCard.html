@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Distribution List">
+        <div class="slds-card__body slds-card__body_inner">
+            <ul>
+                <template 
+                    for:each={distributionList} 
+                    for:item="user">
+                    <li key={user.Id}>
+                        <lightning-avatar 
+                            size="small"
+                            variant="circle"
+                            src={user.SmallPhotoURL}
+                            fallback-icon-name="standard:avatar"
+                            alternative-text={user.Name}
+                            class="slds-m-around_xxx-small">
+                        </lightning-avatar>
+
+                        <lightning-formatted-url 
+                            value={user.relativeURL} 
+                            tooltip={user.Name} 
+                            label={user.Name} 
+                            target="_blank">
+                        </lightning-formatted-url>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
+</template>
