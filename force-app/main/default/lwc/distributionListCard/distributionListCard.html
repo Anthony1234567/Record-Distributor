@@ -1,29 +1,68 @@
 <template>
     <lightning-card title="Distribution List">
         <div class="slds-card__body slds-card__body_inner">
-            <ul>
-                <template 
-                    for:each={distributionList} 
-                    for:item="user">
-                    <li key={user.Id}>
-                        <lightning-avatar 
-                            size="small"
-                            variant="circle"
-                            src={user.SmallPhotoURL}
-                            fallback-icon-name="standard:avatar"
-                            alternative-text={user.Name}
-                            class="slds-m-around_xxx-small">
-                        </lightning-avatar>
 
-                        <lightning-formatted-url 
-                            value={user.relativeURL} 
-                            tooltip={user.Name} 
-                            label={user.Name} 
-                            target="_blank">
-                        </lightning-formatted-url>
-                    </li>
-                </template>
-            </ul>
+
+            <table class="slds-table slds-no-row-hover slds-table_header-hidden">
+                <thead class="slds-assistive-text">
+                    <tr class="slds-line-height_reset">
+                        <th>
+                            <div 
+                                title="Assignee"
+                                class="slds-truncate">
+                                Assignee
+                            </div>
+                        </th>
+                        <th>
+                            <div 
+                                title="Records Assigned Today"
+                                class="slds-truncate">
+                                Records Assigned Today
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <template
+                        for:each={distributionList} 
+                        for:item="assigneeInfo"
+                        for:index="index">
+                        <tr 
+                            key={assigneeInfo.assignee.Id}
+                            class="slds-hint-parent">
+                            <td data-label="Assignee">
+                                <div 
+                                    title={assigneeInfo.assignee.Name}
+                                    class="slds-truncate">
+                                    <lightning-avatar 
+                                        size="small"
+                                        variant="circle"
+                                        src={assigneeInfo.avatarSrc}
+                                        fallback-icon-name="standard:avatar"
+                                        alternative-text={assigneeInfo.assignee.Name}
+                                        class="slds-m-around_xxx-small">
+                                    </lightning-avatar>
+
+                                    <lightning-formatted-url 
+                                        value={assigneeInfo.relativeURL} 
+                                        tooltip={assigneeInfo.assignee.Name} 
+                                        label={assigneeInfo.assignee.Name} 
+                                        target="_blank">
+                                    </lightning-formatted-url>
+                                </div>
+                            </td>
+                            <td data-label="Records Assigned Today">
+                                <div
+                                    title="Records assigned today"
+                                    class="slds-truncate">
+                                    {assigneeInfo.assignedRecordCount}/{dailyCap}
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
         </div>
     </lightning-card>
 </template>

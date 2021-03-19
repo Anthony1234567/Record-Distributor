@@ -2,12 +2,13 @@
     <lightning-card title="Distribution Source Information">
         <template if:true={distributionSourceInfo}>
             <div class="slds-card__body slds-card__body_inner">
-                Distribution Source Name: {distributionSourceInfo.distributionSourceName}
+                Name: {distributionSourceInfo.distributionSourceName}
 
                 <ul>
                     <template 
                         for:each={distributionSourceInfo.talliedRelatedSObjectTypeOwnedRecordCounts} 
-                        for:item="talliedRelatedSObjectTypeOwnedRecordCount">
+                        for:item="talliedRelatedSObjectTypeOwnedRecordCount"
+                        for:index="index">
                         <li key={talliedRelatedSObjectTypeOwnedRecordCount.sObjectTypeName}>
                             Distributable {talliedRelatedSObjectTypeOwnedRecordCount.sObjectTypeName} Count: {talliedRelatedSObjectTypeOwnedRecordCount.ownedRecordCount}
                         </li>
